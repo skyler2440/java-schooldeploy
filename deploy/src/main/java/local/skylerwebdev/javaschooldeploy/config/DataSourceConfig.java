@@ -1,8 +1,14 @@
 package local.skylerwebdev.javaschooldeploy.config;
 
+import local.skylerwebdev.javaschooldeploy.JavaschooldeployApplication;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.ExitCodeGenerator;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.jdbc.DataSourceBuilder;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -13,6 +19,21 @@ import javax.sql.DataSource;
 @Configuration
 public class DataSourceConfig
 {
+    private static final Logger logger = LoggerFactory.getLogger(JavaschooldeployApplication.class);
+    private static boolean stop = false;
+
+    @Autowired
+    private ApplicationContext appContext;
+
+    private static void checkEnvironmentVariable(String envvar)
+    {
+        if (System.getenv(envvar) == null)
+        {
+            logger.error("Environment Variable " + envvar + " missing");
+            stop = true;
+        }
+    }
+
     @Autowired
     private Environment env;
 
@@ -28,10 +49,22 @@ public class DataSourceConfig
 
         if (dbValue.equalsIgnoreCase("POSTGRESQL"))
         {
-            myUrlString = "jdbc:postgresql://" + System.getenv("MYDBHOST") + ":5432/dd65m50d7mqdb8";
+            checkEnvironmentVariable("MYDBHOST");
+            checkEnvironmentVariable("MYDBNAME");
+            checkEnvironmentVariable("MYDBUSER");
+            checkEnvironmentVariable("MYDBPASSWORD");
+
+            if (stop)
+            {
+                logger.info("Manually shutting down system");
+                int exitCode = SpringApplication.exit(appContext, (ExitCodeGenerator) () -> 1);
+                System.exit(exitCode);
+            }
+
+            myUrlString = "jdbc:postgresql://" + System.getenv("MYDBHOST") + ":5432/" + System.getenv("MYDBNAME");
             myDriverClass = "org.postgresql.Driver";
-            myDBUser = "cjfxgbxivxiuss";
-            myDBPassword = "df1598287f1878d0eb26b08b1707bcb529267ad01c680ac1f51138441aadc93d";
+            myDBUser = System.getenv("MYDBUSER");
+            myDBPassword = System.getenv("MYDBPASSWORD");
         } else
         {
             // Assumes H2
@@ -41,8 +74,13 @@ public class DataSourceConfig
             myDBPassword = "";
         }
 
-        System.out.println(myUrlString);
-        return DataSourceBuilder.create().username(myDBUser).password(myDBPassword).url(myUrlString).driverClassName(myDriverClass).build();
+        logger.info("Database URL is " + myUrlString);
+        return DataSourceBuilder.create()
+                .username(myDBUser)
+                .password(myDBPassword)
+                .url(myUrlString)
+                .driverClassName(myDriverClass)
+                .build();
     }
 
     @Bean(name = "jdbcCustom")

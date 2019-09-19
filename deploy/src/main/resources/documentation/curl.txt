@@ -1,0 +1,19 @@
+curl -X POST --user "skyler-client:skyler-secret" -d "grant_type=password&username=admin&password=password" https://skylerwebdev-javaschooldeploy.herokuapp.com/login
+
+curl -X GET -H "Accept: application/json" -H "Authorization: Bearer 8985b696-fe4d-4264-82dd-78c6b4c1e190" https://skylerwebdev-javaschooldeploy.herokuapp.com/courses/courses
+
+curl -X GET -H "Accept: application/json" -H "Authorization: Bearer 8985b696-fe4d-4264-82dd-78c6b4c1e190" https://skylerwebdev-javaschooldeploy.herokuapp.com/courses/studcount
+
+curl -X DELETE -H "Authorization: Bearer 8985b696-fe4d-4264-82dd-78c6b4c1e190" https://skylerwebdev-javaschooldeploy.herokuapp.com/courses/courses/1
+
+curl -X GET -H "Accept: application/json" -H "Authorization: Bearer 8985b696-fe4d-4264-82dd-78c6b4c1e190" https://skylerwebdev-javaschooldeploy.herokuapp.com/students/students
+
+curl -X GET -H "Accept: application/json" -H "Authorization: Bearer 8985b696-fe4d-4264-82dd-78c6b4c1e190" https://skylerwebdev-javaschooldeploy.herokuapp.com/students/Student/1
+
+curl -X GET -H "Accept: application/json" -H "Authorization: Bearer 8985b696-fe4d-4264-82dd-78c6b4c1e190" https://skylerwebdev-javaschooldeploy.herokuapp.com/students/student/namelike/john
+
+curl -X DELETE -H "Authorization: Bearer 8985b696-fe4d-4264-82dd-78c6b4c1e190" https://skylerwebdev-javaschooldeploy.herokuapp.com/students/Student/1
+
+curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer 8985b696-fe4d-4264-82dd-78c6b4c1e190" -d "{ \"courses\": [ { \"courseid\": 1, \"coursename\": \"Math\", \"instructor\": { \"courses\": [ null ], \"instructid\": 1, \"instructname\": \"John Doe\" }, \"students\": [ null ] } ], \"studid\": 1, \"studname\": \"John Smith\"}" https://skylerwebdev-javaschooldeploy.herokuapp.com/students/Student
+
+curl -X PUT  -H "Authorization: Bearer 8985b696-fe4d-4264-82dd-78c6b4c1e190" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"courses\": [ { \"courseid\": 1, \"coursename\": \"Math\", \"instructor\": { \"courses\": [ null ], \"instructid\": 1, \"instructname\": \"John Doe\" }, \"students\": [ null ] } ], \"studid\": 1, \"studname\": \"John Smith\"}" https://skylerwebdev-javaschooldeploy.herokuapp.com/students/Student/28

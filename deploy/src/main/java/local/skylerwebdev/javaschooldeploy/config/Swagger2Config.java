@@ -20,11 +20,11 @@ public class Swagger2Config
     @Bean
     public Docket api()
     {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .select()
-                .apis(RequestHandlerSelectors
-                        .basePackage("local.skylerwebdev.javaschooldeploy"))
-                .paths(PathSelectors.any()).build()
+        return new Docket(DocumentationType.SWAGGER_2).select()
+                //                .apis(RequestHandlerSelectors.any())
+                .apis(RequestHandlerSelectors.basePackage("local.skylerwebdev.javaschooldeploy"))
+                .paths(PathSelectors.any())
+                .build()
                 .useDefaultResponseMessages(false) // Allows only my exception responses
                 .ignoredParameterTypes(Pageable.class) // allows only my paging parameter list
                 .apiInfo(apiEndPointsInfo());
@@ -32,9 +32,10 @@ public class Swagger2Config
 
     private ApiInfo apiEndPointsInfo()
     {
-        return new ApiInfoBuilder().title("School Swagger Project")
-                .description("Java Swagger School")
-                .contact(new Contact("Skyler Dowdy", "http://www.lambdaschool.com", "skyler2440@gmail.com"))
-                .version("1.0.0").build();
+        return new ApiInfoBuilder().title("Java Project for Schools Deployment")
+                .description("A starting application for developing Java Spring Back End Projects")
+                .contact(new Contact("Skyler Dowdy", "https://github.com/skyler2440", "skylerwebdev@gmail.com"))
+                .version("1.0.0")
+                .build();
     }
 }

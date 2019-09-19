@@ -10,36 +10,36 @@ FROM student;
 DELETE
 FROM instructor;
 
-DELETE
-FROM roles;
+-- DELETE
+-- FROM roles;
+--
+-- DELETE
+-- FROM users;
+--
+-- DELETE
+-- FROM userroles;
 
-DELETE
-FROM users;
-
-DELETE
-FROM userroles;
-
-INSERT INTO roles (roleid, name)
-    VALUES(1, 'admin'),
-          (2, 'user'),
-          (3, 'data');
-
-INSERT INTO users (userid, username, password)
-    VALUES(4, 'admin', 'password'),
-          (5, 'cinnamon', 'password'),
-          (6, 'barnbarn', 'password'),
-          (7, 'bob', 'password'),
-          (8, 'jane', 'password');
-
-INSERT INTO userroles (userid, roleid)
-    VALUES(4, 1),
-          (4, 2),
-          (4, 3),
-          (5, 3),
-          (5, 2),
-          (6, 2),
-          (7, 2),
-          (8, 2);
+-- INSERT INTO roles (roleid, name)
+--     VALUES(1, 'admin'),
+--           (2, 'user'),
+--           (3, 'data');
+--
+-- INSERT INTO users (userid, username, password)
+--     VALUES(4, 'admin', 'password'),
+--           (5, 'cinnamon', 'password'),
+--           (6, 'barnbarn', 'password'),
+--           (7, 'bob', 'password'),
+--           (8, 'jane', 'password');
+--
+-- INSERT INTO userroles (userid, roleid)
+--     VALUES(4, 1),
+--           (4, 2),
+--           (4, 3),
+--           (5, 3),
+--           (5, 2),
+--           (6, 2),
+--           (7, 2),
+--           (8, 2);
 
 INSERT INTO instructor (instructid, instructname)
     VALUES(1, 'Sally'),

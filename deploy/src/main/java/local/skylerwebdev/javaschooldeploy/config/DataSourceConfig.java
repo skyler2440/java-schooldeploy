@@ -28,10 +28,10 @@ public class DataSourceConfig
 
         if (dbValue.equalsIgnoreCase("POSTGRESQL"))
         {
-            myUrlString = "jdbc:postgresql://" + System.getenv("MYDBHOST") + ":5432/" + System.getenv("MYDBNAME");
+            myUrlString = "jdbc:postgresql://" + System.getenv("MYDBHOST") + ":5432/dd65m50d7mqdb8";
             myDriverClass = "org.postgresql.Driver";
-            myDBUser = System.getenv("MYDBUSER");
-            myDBPassword = System.getenv("MYDBPASSWORD");
+            myDBUser = "cjfxgbxivxiuss";
+            myDBPassword = "df1598287f1878d0eb26b08b1707bcb529267ad01c680ac1f51138441aadc93d";
         } else
         {
             // Assumes H2
